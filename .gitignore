@@ -1,0 +1,36 @@
+# --- Virtual environment ---
+venv/
+.venv/
+env/
+
+# --- Python cache/bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Packaging / build artifacts ---
+*.egg-info/
+dist/
+build/
+
+# --- Project-specific: generated data & reports ---
+results.db
+*.db
+*.sqlite
+*.sqlite3
+reports/*.png
+reports/*.pdf
+reports/*.svg
+
+# --- Environment / secrets ---
+.env
+
+# --- OS / editor cruft ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# --- Jupyter ---
+.ipynb_checkpoints/
