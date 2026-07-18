@@ -2,7 +2,7 @@ import numpy as np
 from src.config import SimulationConfig
 
 class MarketEnvironment:
-    def __init__(self, config: simulationConfig, rng: np.random.Generator | None = None):
+    def __init__(self, config: SimulationConfig, rng: np.random.Generator | None = None):
         self.config = config
         self.rng = rng if rng is not None else np.random.default_rng()
         self.current_time = 0.0
