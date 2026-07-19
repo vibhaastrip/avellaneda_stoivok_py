@@ -98,16 +98,17 @@ def build_agent(config: SimulationConfig, strategy: Strategy):
     
     raise ValueError(f"Unsupported Strategy: {strategy}")
 
-def realised_sigma(price_hist: list[float], dt: float, window: int):
-    if len(price_hist): 
+def _realised_sigma(price_hist: list[float], dt: float, window: int):
+    if len(price_hist) < 3:
         return None
-    prices = np.array(price_hist[-(window+1) :])
-    log_returns= np.diff(np.log(prices))
 
-    if len(log_returns):
+    prices = np.array(price_hist[-(window + 1):])
+    log_returns = np.diff(np.log(prices))
+
+    if len(log_returns) < 2:
         return None
-    
-    return float(np.std(log_returns, ddof=1)/ np.sqrt(dt))
+
+    return float(np.std(log_returns, ddof=1) / np.sqrt(dt))
 
 def run_simulation(
         config: SimulationConfig,
@@ -122,7 +123,7 @@ def run_simulation(
 
     for _ in range(steps):
         mid_price = env.step_price()
-        realised_sigma = realised_sigma(
+        realised_sigma = _realised_sigma(
             env.price_history,
             config.dt,
             config.volatility_window
@@ -141,7 +142,7 @@ def run_simulation(
                 ask_filled=ask_filled,
                 inventory=agent.inventory,
                 cash=agent.cash,
-                wealth=agent.wealth_history[-1],
+                wealth=agent.wealth_hist[-1],
                 fees_paid=agent.fees_paid,
             )
         )

@@ -106,7 +106,7 @@ class InventorySkew(Naive):
         center = mid_price - (self.inventory * self.inventory_skew)
         bid = center - (self.spread / 2)
         ask = center + (self.spread / 2)
-        return self._apply_quote_controls(mid_price, bid, ask)
+        return self.apply_quote_controls(mid_price, bid, ask)
     
 class VolatilityScaled(Naive):
     def __init__(
@@ -140,7 +140,7 @@ class VolatilityScaled(Naive):
         spread = max(self.spread, volatility_spread)
         bid = mid_price - (spread / 2)
         ask = mid_price + (spread / 2)
-        return self._apply_quote_controls(mid_price, bid, ask)
+        return self.apply_quote_controls(mid_price, bid, ask)
 
 class AvellanedaStoikov(MarketMaker):
     def __init__(
@@ -189,10 +189,10 @@ class EnhanceAvellanedaStoikov(AvellanedaStoikov):
         
         sigma = self.sigma if realized_sigma is None else realized_sigma
         r = self.reservation_price(mid_price, current_time, sigma=sigma)
-        delta = self.optimal_total_spread(current_time, sigma=sigma) / 2.0
+        delta = self.optimal_spread(current_time, sigma=sigma) / 2.0
 
         bid = r - delta
         ask = r + delta
 
-        return self._apply_quote_controls(mid_price, bid, ask)
+        return self.apply_quote_controls(mid_price, bid, ask)
 

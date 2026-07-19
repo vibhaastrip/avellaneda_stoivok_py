@@ -85,6 +85,7 @@ def _build_config(args) -> SimulationConfig:
 def selected_strategies(strategy_arg):
     if strategy_arg=='both':
         return[Strategy.NAIVE, Strategy.AVELLANEDA_STOIKOV]
+    return [Strategy(strategy_arg)]
     
 def uses_gamma(strategy):
     return strategy in{

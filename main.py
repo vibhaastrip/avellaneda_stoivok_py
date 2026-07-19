@@ -8,7 +8,7 @@ from src.analysis_report import (
 )
 from src.config import SimulationConfig
 from src.simulation import Strategy, run_simulation
-from src.storage.queries import gamma_paired_comparison, sweep_summary
+from src.storage.queries import gamma_paired_comp, sweep_summary
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
         else:
             print(summary)
             print()
-            print(gamma_paired_comparison())
+            print(gamma_paired_comp())
         return
 
     if args.batch:

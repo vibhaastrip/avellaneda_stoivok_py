@@ -8,7 +8,7 @@ from src.simulation import SimulationResult
 
 @dataclass
 class SimulationMetrics:
-    et_pnl: float
+    net_pnl: float
     sharpe: float
     sortino: float
     max_drawdown: float
@@ -19,7 +19,7 @@ class SimulationMetrics:
     def total_pnl(self):
         return self.net_pnl
     
-def max_drawdown(wealth_history: list[float]):
+def _max_drawdown(wealth_history: list[float]):
     if not wealth_history:
         return 0.0
     
@@ -27,7 +27,7 @@ def max_drawdown(wealth_history: list[float]):
     max_drawdown = 0.0
 
     for wealth in wealth_history:
-        running_peak = max(wealth_history,wealth)
+        running_peak = max(running_peak,wealth)
         drawdown = running_peak-wealth
         max_drawdown = max(max_drawdown,drawdown)
     
@@ -37,13 +37,13 @@ def calculate_metrics(
         result: SimulationResult,
         sharpe_annualisation_factor: float,
 ):
-    net_pnl = (result.wealth_history[-1]-result.wealth_history[0] if result.wealth_histry else 0.0)
+    net_pnl = (result.wealth_history[-1]-result.wealth_history[0] if result.wealth_history else 0.0)
     max_abs_inventory = (
         float(max(abs(inventory)for inventory in result.inventory_history))
         if result.wealth_history
         else 0.0
     )
-    max_drawdown = max_drawdown(result.wealth_history)
+    max_drawdown = _max_drawdown(result.wealth_history)
 
     if len(result.wealth_history) < 2:
         return SimulationMetrics(

@@ -23,7 +23,7 @@ def summary_stats():
         n_runs=("seed", "count"),
     )
 
-def paired_comp(strategy_a: str = 'avellaneda_stoikiov', strategy_b: str = 'naive'):
+def paired_comp(strategy_a: str = 'avellaneda_stoikov', strategy_b: str = 'naive'):
     runs = load_runs()
     if runs.empty:
         runs = pd.DataFrame()
@@ -31,7 +31,7 @@ def paired_comp(strategy_a: str = 'avellaneda_stoikiov', strategy_b: str = 'naiv
     paired = runs[runs["strategy"].isin([strategy_a,strategy_b])].pivot_table(index='seed', columns='strategy',values=['net_pnl','sharpe'])
 
     if strategy_a not in paired["net_pnl"].columns or strategy_b not in paired["net_pnl"].columns:
-        return pd.DataFrame
+        return pd.DataFrame()
     
     paired = paired.dropna()
 

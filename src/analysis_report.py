@@ -159,14 +159,14 @@ def plot_strategy_diagnostics():
 
     axes[0, 1].boxplot(
         [strategy_runs["max_drawdown"] for _, strategy_runs in strategy_groups],
-        labels=[strategy for strategy, _ in strategy_groups],
+        tick_labels=[strategy for strategy, _ in strategy_groups],
     )
     axes[0, 1].set_title("Drawdown by Strategy")
     axes[0, 1].set_ylabel("Max Drawdown")
 
     axes[1, 0].boxplot(
         [strategy_runs["max_abs_inventory"] for _, strategy_runs in strategy_groups],
-        labels=[strategy for strategy, _ in strategy_groups],
+        tick_labels=[strategy for strategy, _ in strategy_groups],
     )
     axes[1, 0].set_title("Inventory Exposure by Strategy")
     axes[1, 0].set_ylabel("Max Absolute Inventory")

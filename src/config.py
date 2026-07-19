@@ -9,7 +9,7 @@ class SimulationConfig:
     start_price: float = 100
     k: float = 1.5
     A: float = 140
-    gamma: float = 1.0
+    gamma: float = 2.5
     naive_spread: float = 0.5
     maker_rebate: float = 0.0002
     taker_fee: float = 0.0005

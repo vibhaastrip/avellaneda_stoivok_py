@@ -11,7 +11,7 @@ class Run(Base):
     strategy : Mapped[str] = mapped_column(String, nullable=False)
     seed: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    gamma: Mapped[float] = mapped_column(Float, nullable=False)
+    gamma: Mapped[float] = mapped_column(Float, nullable=True)
     sigma: Mapped[float] = mapped_column(Float, nullable=False)
     k: Mapped[float] = mapped_column(Float, nullable=False)
     A: Mapped[float] = mapped_column(Float, nullable=False)

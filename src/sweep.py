@@ -1,11 +1,12 @@
 import argparse
 from dataclasses import replace
+import numpy as np
 
 from src.config import SimulationConfig
 from src.run_batch import run_batch
 from src.simulation import Strategy
 
-DEFAULT_GAMMA_VALUES = "0.01,0.05,0.1,0.25,0.5,1.0,2.0"
+DEFAULT_GAMMA_VALUES = np.arange(1.0, 8.5, 0.5)
 
 
 def _parse_gamma_values(raw_values: str) -> list[float]:

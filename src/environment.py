@@ -12,8 +12,8 @@ class MarketEnvironment:
         self.tiem_history =[]
 
     def step_price(self):
-        previous_price = self.mid_price()
-        dW = self.rng.normla(0,np.sqrt(self.config.dt))
+        previous_price = self.mid_price
+        dW = self.rng.normal(0,np.sqrt(self.config.dt))
         self.mid_price += self.mid_price*self.config.sigma*dW
         self.last_return = (self.mid_price - previous_price)/previous_price
         self.current_time += self.config.dt
@@ -31,7 +31,7 @@ class MarketEnvironment:
     
     def execute_order(self, bid, ask):
         p_buy = self._fill_probabilty(bid)
-        p_ask = self._fill_probabilty(ask)
+        p_sell = self._fill_probabilty(ask)
 
         if self.config.adverse_selection_strength:
             adverse_signal = np.sign(self.last_return)
